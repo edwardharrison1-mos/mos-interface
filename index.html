@@ -8,7 +8,7 @@
     <style>
         :root { --gold: #D4AF37; --amber: #FFBF00; --charcoal: #121212; --dark-gray: #1E1E1E; --white: #FFFFFF; --status-green: #00ff41; --status-yellow: #ffd700; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #000; color: var(--white); line-height: 1.4; padding-bottom: 40px; }
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #000; color: var(--white); line-height: 1.4; padding-bottom: 60px; }
         
         .cmd-header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 30px 15px; text-align: center; }
         .cmd-header h1 { font-family: 'Montserrat'; font-size: 20px; text-transform: uppercase; letter-spacing: 4px; margin: 5px 0 0 0; }
@@ -19,23 +19,18 @@
         .portfolio-brief { background: #1a1a1a; border: 1px solid #333; padding: 20px; margin-bottom: 25px; border-left: 4px solid var(--gold); }
         .portfolio-brief p { margin: 0; font-size: 13px; color: #ccc; }
 
-        /* CLIENT CARDS */
         .client-card { background: #111; border: 1px solid #333; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
         .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
         .client-info h3 { margin: 0; font-family: 'Montserrat'; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
         .client-info p { margin: 2px 0 0 0; font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-        .cai-badge { font-size: 10px; font-weight: 800; color: var(--gold); background: rgba(212, 175, 55, 0.1); padding: 4px 8px; border-radius: 2px; }
+        .cai-badge { font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 2px; }
 
-        /* PHASE RAIL */
         .phase-rail { display: flex; gap: 5px; }
-        .phase-node { flex: 1; text-align: center; padding: 12px 0; border: 1px solid #333; text-decoration: none; color: #555; font-size: 9px; font-weight: 800; border-radius: 2px; transition: 0.2s; }
-        .phase-node.active { background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        .phase-node.complete { border-color: #555; color: var(--gold); }
+        .phase-node { flex: 1; text-align: center; padding: 12px 0; border: 1px solid #333; text-decoration: none; color: #444; font-size: 9px; font-weight: 800; border-radius: 2px; transition: 0.2s; }
+        .phase-node.active { background: var(--gold); color: #000; border-color: var(--gold); }
+        .phase-node.complete { border-color: #444; color: var(--gold); }
 
-        @media (max-width: 480px) {
-            .cmd-header { padding: 20px 10px; }
-            .cmd-header h1 { font-size: 18px; }
-        }
+        @media (max-width: 480px) { .cmd-header h1 { font-size: 18px; } }
     </style>
 </head>
 <body>
@@ -53,7 +48,7 @@
     <div class="client-card">
         <div class="card-top">
             <div class="client-info"><h3>XORCOM</h3><p>M-2026-XOR // Tech Infra</p></div>
-            <div class="cai-badge">84% CAI</div>
+            <div class="cai-badge" style="color:var(--gold);">84% CAI</div>
         </div>
         <div class="phase-rail">
             <a href="briefing.html?client=XORCOM" class="phase-node complete">M01</a>
@@ -115,7 +110,123 @@
         </div>
     </div>
 
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Aero</h3><p>M-2026-AER // Logistics</p></div>
+            <div class="cai-badge" style="color:var(--gold);">72% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=AERO" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=AERO" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=AERO" class="phase-node active">M03</a>
+            <a href="governance.html?client=AERO" class="phase-node">M04</a>
+        </div>
     </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Omni</h3><p>M-2026-OMN // Freight</p></div>
+            <div class="cai-badge" style="color:var(--status-yellow);">48% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=OMNI" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=OMNI" class="phase-node active">M02</a>
+            <a href="roadmap.html?client=OMNI" class="phase-node">M03</a>
+            <a href="governance.html?client=OMNI" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Vertex</h3><p>M-2026-VTX // Infra</p></div>
+            <div class="cai-badge" style="color:#666;">-- CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=VERTEX" class="phase-node active">M01</a>
+            <a href="diagnostic.html?client=VERTEX" class="phase-node">M02</a>
+            <a href="roadmap.html?client=VERTEX" class="phase-node">M03</a>
+            <a href="governance.html?client=VERTEX" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Global</h3><p>M-2025-GLH // Med-Dist</p></div>
+            <div class="cai-badge" style="color:var(--status-green);">99% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=GLOBAL" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=GLOBAL" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=GLOBAL" class="phase-node complete">M03</a>
+            <a href="governance.html?client=GLOBAL" class="phase-node active">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Precision</h3><p>M-2026-PRM // Clinical</p></div>
+            <div class="cai-badge" style="color:var(--gold);">81% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=PRECISION" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=PRECISION" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=PRECISION" class="phase-node active">M03</a>
+            <a href="governance.html?client=PRECISION" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Zenith</h3><p>M-2026-ZEN // Cloud</p></div>
+            <div class="cai-badge" style="color:#666;">-- CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=ZENITH" class="phase-node active">M01</a>
+            <a href="diagnostic.html?client=ZENITH" class="phase-node">M02</a>
+            <a href="roadmap.html?client=ZENITH" class="phase-node">M03</a>
+            <a href="governance.html?client=ZENITH" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Alpha</h3><p>M-2025-ALP // Sourcing</p></div>
+            <div class="cai-badge" style="color:var(--status-green);">94% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=ALPHA" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=ALPHA" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=ALPHA" class="phase-node complete">M03</a>
+            <a href="governance.html?client=ALPHA" class="phase-node active">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Reserve</h3><p>M-2026-RSV // Operations</p></div>
+            <div class="cai-badge" style="color:#666;">-- CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=RESERVE" class="phase-node active">M01</a>
+            <a href="diagnostic.html?client=RESERVE" class="phase-node">M02</a>
+            <a href="roadmap.html?client=RESERVE" class="phase-node">M03</a>
+            <a href="governance.html?client=RESERVE" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>PetroLink</h3><p>M-2026-PTR // Energy</p></div>
+            <div class="cai-badge" style="color:var(--status-green);">91% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=PETROLINK" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=PETROLINK" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=PETROLINK" class="phase-node complete">M03</a>
+            <a href="governance.html?client=PETROLINK" class="phase-node active">M04</a>
+        </div>
+    </div>
+</div>
 
 <footer style="text-align: center; padding: 20px; font-size: 9px; color: #444; text-transform: uppercase;">Meridian Access Group // 2026</footer>
 </body>
