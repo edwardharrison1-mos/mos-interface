@@ -27,7 +27,6 @@
     <p>Audit analytics for <span class="client-name-inject"></span> indicate a persistent compliance gap within the <span id="client-sector"></span> sector.</p>
     <p>Current Contract Alignment: <strong id="client-cai" style="color: var(--gold);"></strong></p>
 </div>
-<footer>
 <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10,10,10,0.98); border-top: 2px solid #D4AF37; padding: 15px; z-index: 2000; display: flex; justify-content: space-around; align-items: center; backdrop-filter: blur(10px);">
         <a href="index.html" style="color: #D4AF37; text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase;">← Portfolio</a>
         
@@ -43,22 +42,22 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const params = new URLSearchParams(window.location.search);
-        const clientId = params.get('client');
+        // INNOVATION: .toUpperCase() ensures 'xorcom' and 'XORCOM' both work
+        const rawId = params.get('client');
+        const clientId = rawId ? rawId.toUpperCase() : null;
 
-        // Check if ledger and client exist
         if (typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
             const data = MOS_LEDGER[clientId];
             
-            // Injecting data into specific IDs
+            // DATA INJECTION
             if(document.getElementById('client-name')) document.getElementById('client-name').innerText = data.name;
             if(document.getElementById('client-cai')) document.getElementById('client-cai').innerText = data.cai;
             if(document.getElementById('client-sector')) document.getElementById('client-sector').innerText = data.sector;
             if(document.getElementById('recovery-inject')) document.getElementById('recovery-inject').innerText = data.recovery;
             
-            // Universal phrases (e.g., "Analysis for XORCOM")
             document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
 
-            // Update Navigation links to persist the client ID
+            // NAVIGATION PERSISTENCE
             const navMap = {
                 'link-M01': 'briefing.html',
                 'link-M02': 'diagnostic.html',
@@ -70,7 +69,6 @@
                 const btn = document.getElementById(id);
                 if (btn) {
                     btn.href = file + "?client=" + clientId;
-                    // Visual indicator for current phase
                     if (window.location.pathname.includes(file)) {
                         btn.style.borderColor = "#D4AF37";
                         btn.style.color = "#D4AF37";
@@ -79,7 +77,9 @@
                 }
             }
         } else {
-            console.error("MOS Error: Data Handshake Failed for ID:", clientId);
+            // Error handling for the meeting
+            console.error("MOS Error: No data found for", clientId);
+            if(document.getElementById('client-name')) document.getElementById('client-name').innerText = "ID NOT FOUND";
         }
     });
     </script>
