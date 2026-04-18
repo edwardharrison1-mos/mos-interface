@@ -27,65 +27,61 @@
     <p>Audit analytics for <span class="client-name-inject"></span> indicate a persistent compliance gap within the <span id="client-sector"></span> sector.</p>
     <p>Current Contract Alignment: <strong id="client-cai" style="color: var(--gold);"></strong></p>
 </div>
-
+<footer>
 <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10,10,10,0.98); border-top: 2px solid #D4AF37; padding: 15px; z-index: 2000; display: flex; justify-content: space-around; align-items: center; backdrop-filter: blur(10px);">
         <a href="index.html" style="color: #D4AF37; text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase;">← Portfolio</a>
         
         <div style="display: flex; gap: 8px;">
-            <a href="#" id="link-M01" style="width: 35px; height: 35px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800;">M01</a>
-            <a href="#" id="link-M02" style="width: 35px; height: 35px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800;">M02</a>
-            <a href="#" id="link-M03" style="width: 35px; height: 35px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800;">M03</a>
-            <a href="#" id="link-M04" style="width: 35px; height: 35px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800;">M04</a>
+            <a href="#" id="link-M01" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M01</a>
+            <a href="#" id="link-M02" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M02</a>
+            <a href="#" id="link-M03" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M03</a>
+            <a href="#" id="link-M04" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M04</a>
         </div>
-
-        <div id="footer-clientID" style="font-size: 10px; color: #00ff41; font-weight: 800; font-family: monospace;"></div>
     </footer>
 
     <script src="ledger.js"></script>
-
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const clientId = urlParams.get('client');
+    document.addEventListener("DOMContentLoaded", function() {
+        const params = new URLSearchParams(window.location.search);
+        const clientId = params.get('client');
 
-            if (clientId && typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
-                const data = MOS_LEDGER[clientId];
-                
-                // 1. Inject Text Data
-                if(document.getElementById('client-name')) document.getElementById('client-name').innerText = data.name;
-                if(document.getElementById('footer-clientID')) document.getElementById('footer-clientID').innerText = data.id;
-                
-                document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
-                if(document.getElementById('client-cai')) document.getElementById('client-cai').innerText = data.cai;
-                if(document.getElementById('client-sector')) document.getElementById('client-sector').innerText = data.sector;
-                if(document.getElementById('recovery-inject')) document.getElementById('recovery-inject').innerText = data.recovery;
+        // Check if ledger and client exist
+        if (typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
+            const data = MOS_LEDGER[clientId];
+            
+            // Injecting data into specific IDs
+            if(document.getElementById('client-name')) document.getElementById('client-name').innerText = data.name;
+            if(document.getElementById('client-cai')) document.getElementById('client-cai').innerText = data.cai;
+            if(document.getElementById('client-sector')) document.getElementById('client-sector').innerText = data.sector;
+            if(document.getElementById('recovery-inject')) document.getElementById('recovery-inject').innerText = data.recovery;
+            
+            // Universal phrases (e.g., "Analysis for XORCOM")
+            document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
 
-                // 2. Fix Navigation Links (The Phase Jumper)
-                const pages = {
-                    'link-M01': 'briefing.html',
-                    'link-M02': 'diagnostic.html',
-                    'link-M03': 'roadmap.html',
-                    'link-M04': 'governance.html'
-                };
+            // Update Navigation links to persist the client ID
+            const navMap = {
+                'link-M01': 'briefing.html',
+                'link-M02': 'diagnostic.html',
+                'link-M03': 'roadmap.html',
+                'link-M04': 'governance.html'
+            };
 
-                for (const [id, fileName] of Object.entries(pages)) {
-                    const btn = document.getElementById(id);
-                    if (btn) {
-                        btn.href = fileName + "?client=" + clientId;
-                        // Highlight current page
-                        if (window.location.pathname.includes(fileName)) {
-                            btn.style.borderColor = "#D4AF37";
-                            btn.style.color = "#D4AF37";
-                            btn.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
-                        }
+            for (const [id, file] of Object.entries(navMap)) {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.href = file + "?client=" + clientId;
+                    // Visual indicator for current phase
+                    if (window.location.pathname.includes(file)) {
+                        btn.style.borderColor = "#D4AF37";
+                        btn.style.color = "#D4AF37";
+                        btn.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
                     }
                 }
-            } else {
-                console.error("Context Lost. Redirecting...");
-                // Uncomment the line below once you know it works to auto-fix errors
-                // window.location.href = 'index.html'; 
             }
-        });
+        } else {
+            console.error("MOS Error: Data Handshake Failed for ID:", clientId);
+        }
+    });
     </script>
 </body>
 </html>
