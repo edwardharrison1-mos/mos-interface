@@ -5,84 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOS | Strategic Vetting</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --gold: #D4AF37; --charcoal: #121212; }
-        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; }
-        header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 20px; text-align: center; }
-        .wrapper { max-width: 800px; margin: 50px auto; padding: 40px; border: 1px solid #333; background: #111; }
-        footer { position: fixed; bottom: 0; width: 100%; background: #0a0a0a; border-top: 2px solid var(--gold); padding: 15px; display: flex; justify-content: space-around; }
-        .jumper { color: #555; text-decoration: none; font-size: 10px; font-weight: 800; }
-        .current { color: var(--gold); }
-    </style>
+    <style> :root { --gold: #D4AF37; --charcoal: #121212; } body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; padding-bottom: 80px; } header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 20px; text-align: center; } .wrapper { max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #333; background: #111; } </style>
 </head>
 <body>
-
 <header>
-    <div style="font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px;">Meridian Operating System</div>
-    <h2 style="font-family: 'Montserrat'; text-transform: uppercase;">Profile: <span id="client-name">Loading...</span></h2>
+    <div style="font-size: 9px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px;">Meridian Operating System</div>
+    <h2 style="font-family: 'Montserrat'; text-transform: uppercase;">Profile: <span id="client-name" style="color:var(--gold)">Loading...</span></h2>
 </header>
-
 <div class="wrapper">
-    <h3 style="color: var(--gold); text-transform: uppercase; font-size: 14px;">M01 // Strategic Vetting</h3>
-    <p>Audit of <span class="client-name-inject"></span> reveals a compliance gap in the <strong id="client-sector">--</strong> sector.</p>
-    <p>Current CAI Score: <strong id="client-cai" style="color: var(--gold);">--</strong></p>
+    <h3 style="color: var(--gold); text-transform: uppercase; font-size: 14px;">M02 // Recovery Diagnostic</h3>
+    <p>Forensic telemetry for <span class="client-name-inject"></span> identifies specific price-file discrepancies in <span id="client-sector">--</span>.</p>
+    <p><strong>Identified Recovery:</strong> <span id="recovery-inject" style="color: var(--gold);">--</span></p>
 </div>
-
 <footer style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10,10,10,0.98); border-top: 2px solid #D4AF37; padding: 15px; z-index: 2000; display: flex; justify-content: space-around; align-items: center; backdrop-filter: blur(10px);">
-        <a href="index.html" style="color: #D4AF37; text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase;">← Portfolio</a>
-        
-        <div style="display: flex; gap: 8px;">
-            <a href="#" id="link-M01" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M01</a>
-            <a href="#" id="link-M02" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M02</a>
-            <a href="#" id="link-M03" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M03</a>
-            <a href="#" id="link-M04" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M04</a>
-        </div>
-    </footer>
-
-    <script src="ledger.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const params = new URLSearchParams(window.location.search);
-        // INNOVATION: .toUpperCase() ensures 'xorcom' and 'XORCOM' both work
-        const rawId = params.get('client');
-        const clientId = rawId ? rawId.toUpperCase() : null;
-
-        if (typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
-            const data = MOS_LEDGER[clientId];
-            
-            // DATA INJECTION
-            if(document.getElementById('client-name')) document.getElementById('client-name').innerText = data.name;
-            if(document.getElementById('client-cai')) document.getElementById('client-cai').innerText = data.cai;
-            if(document.getElementById('client-sector')) document.getElementById('client-sector').innerText = data.sector;
-            if(document.getElementById('recovery-inject')) document.getElementById('recovery-inject').innerText = data.recovery;
-            
-            document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
-
-            // NAVIGATION PERSISTENCE
-            const navMap = {
-                'link-M01': 'briefing.html',
-                'link-M02': 'diagnostic.html',
-                'link-M03': 'roadmap.html',
-                'link-M04': 'governance.html'
-            };
-
-            for (const [id, file] of Object.entries(navMap)) {
-                const btn = document.getElementById(id);
-                if (btn) {
-                    btn.href = file + "?client=" + clientId;
-                    if (window.location.pathname.includes(file)) {
-                        btn.style.borderColor = "#D4AF37";
-                        btn.style.color = "#D4AF37";
-                        btn.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
-                    }
-                }
+    <a href="index.html" style="color: #D4AF37; text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase;">← Portfolio</a>
+    <div style="display: flex; gap: 8px;">
+        <a href="#" id="link-M01" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M01</a>
+        <a href="#" id="link-M02" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M02</a>
+        <a href="#" id="link-M03" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M03</a>
+        <a href="#" id="link-M04" style="width: 38px; height: 38px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; border-radius: 4px;">M04</a>
+    </div>
+</footer>
+<script src="ledger.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const clientId = params.get('client') ? params.get('client').toUpperCase() : null;
+    if (typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
+        const data = MOS_LEDGER[clientId];
+        document.getElementById('client-name').innerText = data.name;
+        document.getElementById('client-cai').innerText = data.cai;
+        document.getElementById('client-sector').innerText = data.sector;
+        document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
+        const navMap = {'link-M01':'briefing.html','link-M02':'diagnostic.html','link-M03':'roadmap.html','link-M04':'governance.html'};
+        for (const [id, file] of Object.entries(navMap)) {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.href = file + "?client=" + clientId;
+                if (window.location.pathname.includes(file)) { btn.style.borderColor = "#D4AF37"; btn.style.color = "#D4AF37"; btn.style.backgroundColor = "rgba(212, 175, 55, 0.1)"; }
             }
-        } else {
-            // Error handling for the meeting
-            console.error("MOS Error: No data found for", clientId);
-            if(document.getElementById('client-name')) document.getElementById('client-name').innerText = "ID NOT FOUND";
         }
-    });
-    </script>
+    }
+});
+</script>
 </body>
 </html>
