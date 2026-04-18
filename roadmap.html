@@ -3,31 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MOS | Forensic Report</title>
+    <title>MOS | Strategic Vetting</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --charcoal: #121212; }
         body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; padding-bottom: 100px; }
         header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 25px 15px; text-align: center; }
-        .wrapper { max-width: 800px; margin: 20px auto; padding: 25px; border: 1px solid #333; background: #111; border-radius: 4px; }
-        footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10,10,10,0.98); border-top: 2px solid var(--gold); padding: 15px; z-index: 9999; display: flex; justify-content: space-around; align-items: center; backdrop-filter: blur(10px); }
+        .wrapper { max-width: 800px; margin: 20px auto; padding: 25px; border: 1px solid #333; background: #111; border-radius: 4px; border-left: 4px solid var(--gold); }
+        footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a0a; border-top: 2px solid var(--gold); padding: 15px; display: flex; justify-content: space-around; align-items: center; z-index: 9999; }
         .jumper { width: 42px; height: 42px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #555; font-size: 10px; font-weight: 800; border-radius: 4px; }
     </style>
 </head>
 <body>
-
 <header>
     <div style="font-size: 9px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 5px;">Meridian Operating System</div>
-    <h2 style="font-family: 'Montserrat'; text-transform: uppercase; margin: 0;">Profile: <span id="client-name" style="color:var(--gold)">LOADING...</span></h2>
+    <h2 style="font-family: 'Montserrat'; text-transform: uppercase; margin: 0;">Profile: <span id="client-name" style="color:var(--gold)">--</span></h2>
 </header>
 
 <div class="wrapper">
     <h3 style="color: var(--gold); text-transform: uppercase; font-size: 14px; margin-top: 0;">M03 // GPO Migration</h3>
-    <p>Forensic analysis for <span class="client-name-inject" style="color: var(--gold); font-weight: 700;">[Client]</span>.</p>
-    <p>Sector: <strong id="client-sector">--</strong> | CAI: <strong id="client-cai">--</strong></p>
+    <p>Executing the Compliance Lock for <span class="client-name-inject" style="color:var(--gold); font-weight:700;">[Client]</span>.</p>
+    <p>All vendor price-files are being frozen at the GPO baseline to prevent price drift.</p>
+    <p><strong>Status:</strong> <span style="color: var(--gold);">Migration Active</span></p>
 </div>
-
-<footer style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0a0a; border-top: 2px solid var(--gold); padding: 15px; display: flex; justify-content: space-around; align-items: center;">
+<footer>
     <a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 11px; font-weight: 900; text-transform: uppercase;">← Portfolio</a>
     <div style="display: flex; gap: 8px;">
         <a href="#" id="link-M01" class="jumper">M01</a>
@@ -37,22 +36,26 @@
     </div>
 </footer>
 
-<script src="ledger.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const clientId = params.get('client');
+const MOS_LEDGER = {
+    "XORCOM": { name: "XORCOM", cai: "84%", sector: "Tech Infra", recovery: "$420,000" },
+    "GHG": { name: "GHG", cai: "42%", sector: "Facilities", recovery: "$842,500" },
+    "NEXUS": { name: "Nexus", cai: "96%", sector: "Supply Chain", recovery: "$142,840" },
+    "BEACON": { name: "Beacon", cai: "Pending", sector: "Med-Surg", recovery: "$0" },
+    "TITAN": { name: "Titan", cai: "58%", sector: "Industrial", recovery: "$210,000" }
+};
 
-    if (clientId && typeof MOS_LEDGER !== 'undefined' && MOS_LEDGER[clientId]) {
+window.onload = function() {
+    const params = new URLSearchParams(window.location.search);
+    const rawId = params.get('client');
+    const clientId = rawId ? rawId.toUpperCase() : null;
+    if (clientId && MOS_LEDGER[clientId]) {
         const data = MOS_LEDGER[clientId];
-        
-        // Inject Data
         document.getElementById('client-name').innerText = data.name;
         if(document.getElementById('client-cai')) document.getElementById('client-cai').innerText = data.cai;
         if(document.getElementById('client-sector')) document.getElementById('client-sector').innerText = data.sector;
+        if(document.getElementById('recovery-inject')) document.getElementById('recovery-inject').innerText = data.recovery;
         document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
-
-        // PERSISTENCE LOGIC: Re-wire the buttons
         const navMap = {'link-M01':'briefing.html','link-M02':'diagnostic.html','link-M03':'roadmap.html','link-M04':'governance.html'};
         for (const [id, file] of Object.entries(navMap)) {
             const btn = document.getElementById(id);
@@ -64,10 +67,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         }
-    } else {
-        document.getElementById('client-name').innerText = "CONTEXT ERROR";
     }
-});
+};
 </script>
 </body>
 </html>
