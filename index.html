@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOS | Master Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --amber: #FFBF00; --charcoal: #121212; --white: #FFFFFF; }
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; padding-bottom: 50px; }
+        .cmd-header { background: var(--charcoal); border-bottom: 3px solid var(--gold); padding: 40px; text-align: center; }
+        .dashboard-wrapper { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .client-card { background: #1a1a1a; border: 1px solid #333; padding: 25px; margin-bottom: 20px; border-left: 4px solid var(--gold); }
+        .phase-rail { display: flex; gap: 10px; margin-top: 20px; }
+        .phase-node { flex: 1; padding: 10px; border: 1px solid #333; text-align: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .phase-node:hover { border-color: var(--gold); color: var(--gold); }
+        .active { border-color: var(--gold); color: var(--gold); }
+    </style>
+</head>
+<body>
+
+<div class="cmd-header">
+    <span style="color:var(--amber); font-size:10px; letter-spacing:5px; text-transform:uppercase;">Meridian Operating System</span>
+    <h1 style="font-family:'Montserrat'; margin:0; letter-spacing:4px;">Master Portfolio</h1>
+</div>
+
+<div class="dashboard-wrapper">
+    <div class="client-card">
+        <h3>XORCOM <span style="float:right; color:var(--gold); font-size:12px;">84% CAI</span></h3>
+        <div class="phase-rail">
+            <a href="briefing.html?client=XORCOM" class="phase-node">M01</a>
+            <a href="diagnostic.html?client=XORCOM" class="phase-node">M02</a>
+            <a href="roadmap.html?client=XORCOM" class="phase-node active">M03</a>
+            <a href="governance.html?client=XORCOM" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <h3>GHG <span style="float:right; color:var(--amber); font-size:12px;">42% CAI</span></h3>
+        <div class="phase-rail">
+            <a href="briefing.html?client=GHG" class="phase-node">M01</a>
+            <a href="diagnostic.html?client=GHG" class="phase-node active">M02</a>
+            <a href="roadmap.html?client=GHG" class="phase-node">M03</a>
+            <a href="governance.html?client=GHG" class="phase-node">M04</a>
+        </div>
+    </div>
+    
+    </div>
+
+</body>
+</html>

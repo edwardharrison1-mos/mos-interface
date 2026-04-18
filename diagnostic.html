@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOS | Strategic Vetting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --charcoal: #121212; }
+        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; }
+        header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 20px; text-align: center; }
+        .wrapper { max-width: 800px; margin: 50px auto; padding: 40px; border: 1px solid #333; background: #111; }
+        footer { position: fixed; bottom: 0; width: 100%; background: #0a0a0a; border-top: 2px solid var(--gold); padding: 15px; display: flex; justify-content: space-around; }
+        .jumper { color: #555; text-decoration: none; font-size: 10px; font-weight: 800; }
+        .current { color: var(--gold); }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 3px;">Meridian Operating System</div>
+    <h2 style="font-family: 'Montserrat'; text-transform: uppercase;">Profile: <span id="client-name">Loading...</span></h2>
+</header>
+
+<div class="wrapper">
+    <h3 style="color: var(--gold); text-transform: uppercase; font-size: 14px;">M01 // Strategic Vetting</h3>
+    <p>Audit analytics for <span class="client-name-inject"></span> indicate a persistent compliance gap within the <span id="client-sector"></span> sector.</p>
+    <p>Current Contract Alignment: <strong id="client-cai" style="color: var(--gold);"></strong></p>
+</div>
+
+<footer>
+    <a href="index.html" style="color:var(--gold); text-decoration:none; font-weight:900;">← PORTFOLIO</a>
+    <a href="#" id="link-M01" class="jumper current">M01</a>
+    <a href="#" id="link-M02" class="jumper">M02</a>
+    <a href="#" id="link-M03" class="jumper">M03</a>
+    <a href="#" id="link-M04" class="jumper">M04</a>
+</footer>
+
+<script src="ledger.js"></script>
+<script>
+    // THE SEARCHER SCRIPT
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get('client');
+
+    if (clientId && MOS_LEDGER[clientId]) {
+        const data = MOS_LEDGER[clientId];
+        
+        // Inject Data
+        document.getElementById('client-name').innerText = data.name;
+        document.getElementById('client-cai').innerText = data.cai;
+        document.getElementById('client-sector').innerText = data.sector;
+        document.querySelectorAll('.client-name-inject').forEach(el => el.innerText = data.name);
+
+        // Update Nav Jumper Links to keep the context
+        document.getElementById('link-M01').href = `briefing.html?client=${clientId}`;
+        document.getElementById('link-M02').href = `diagnostic.html?client=${clientId}`;
+        document.getElementById('link-M03').href = `roadmap.html?client=${clientId}`;
+        document.getElementById('link-M04').href = `governance.html?client=${clientId}`;
+    } else {
+        window.location.href = 'index.html'; // Redirect back if no client found
+    }
+</script>
+</body>
+</html>
