@@ -2,49 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MOS | Master Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --amber: #FFBF00; --charcoal: #121212; --white: #FFFFFF; }
-        body { font-family: 'Inter', sans-serif; background: #000; color: #fff; margin: 0; padding-bottom: 50px; }
-        .cmd-header { background: var(--charcoal); border-bottom: 3px solid var(--gold); padding: 40px; text-align: center; }
-        .dashboard-wrapper { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-        .client-card { background: #1a1a1a; border: 1px solid #333; padding: 25px; margin-bottom: 20px; border-left: 4px solid var(--gold); }
-        .phase-rail { display: flex; gap: 10px; margin-top: 20px; }
-        .phase-node { flex: 1; padding: 10px; border: 1px solid #333; text-align: center; text-decoration: none; color: #666; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .phase-node:hover { border-color: var(--gold); color: var(--gold); }
-        .active { border-color: var(--gold); color: var(--gold); }
+        :root { --gold: #D4AF37; --amber: #FFBF00; --charcoal: #121212; --dark-gray: #1E1E1E; --white: #FFFFFF; --status-green: #00ff41; --status-yellow: #ffd700; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #000; color: var(--white); line-height: 1.4; padding-bottom: 40px; }
+        
+        .cmd-header { background: var(--charcoal); border-bottom: 2px solid var(--gold); padding: 30px 15px; text-align: center; }
+        .cmd-header h1 { font-family: 'Montserrat'; font-size: 20px; text-transform: uppercase; letter-spacing: 4px; margin: 5px 0 0 0; }
+        .cmd-header span { color: var(--amber); font-size: 9px; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; }
+
+        .dashboard-wrapper { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+        .portfolio-brief { background: #1a1a1a; border: 1px solid #333; padding: 20px; margin-bottom: 25px; border-left: 4px solid var(--gold); }
+        .portfolio-brief p { margin: 0; font-size: 13px; color: #ccc; }
+
+        /* CLIENT CARDS */
+        .client-card { background: #111; border: 1px solid #333; padding: 15px; margin-bottom: 15px; border-radius: 4px; }
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .client-info h3 { margin: 0; font-family: 'Montserrat'; font-size: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .client-info p { margin: 2px 0 0 0; font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .cai-badge { font-size: 10px; font-weight: 800; color: var(--gold); background: rgba(212, 175, 55, 0.1); padding: 4px 8px; border-radius: 2px; }
+
+        /* PHASE RAIL */
+        .phase-rail { display: flex; gap: 5px; }
+        .phase-node { flex: 1; text-align: center; padding: 12px 0; border: 1px solid #333; text-decoration: none; color: #555; font-size: 9px; font-weight: 800; border-radius: 2px; transition: 0.2s; }
+        .phase-node.active { background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .phase-node.complete { border-color: #555; color: var(--gold); }
+
+        @media (max-width: 480px) {
+            .cmd-header { padding: 20px 10px; }
+            .cmd-header h1 { font-size: 18px; }
+        }
     </style>
 </head>
 <body>
 
 <div class="cmd-header">
-    <span style="color:var(--amber); font-size:10px; letter-spacing:5px; text-transform:uppercase;">Meridian Operating System</span>
-    <h1 style="font-family:'Montserrat'; margin:0; letter-spacing:4px;">Master Portfolio</h1>
+    <span>Meridian Operating System</span>
+    <h1>Master Portfolio</h1>
 </div>
 
 <div class="dashboard-wrapper">
+    <div class="portfolio-brief">
+        <p><strong>Portfolio Oversight:</strong> 14 Units | <strong>Recovered Capital:</strong> $2.4M</p>
+    </div>
+
     <div class="client-card">
-        <h3>XORCOM <span style="float:right; color:var(--gold); font-size:12px;">84% CAI</span></h3>
+        <div class="card-top">
+            <div class="client-info"><h3>XORCOM</h3><p>M-2026-XOR // Tech Infra</p></div>
+            <div class="cai-badge">84% CAI</div>
+        </div>
         <div class="phase-rail">
-            <a href="briefing.html?client=XORCOM" class="phase-node">M01</a>
-            <a href="diagnostic.html?client=XORCOM" class="phase-node">M02</a>
+            <a href="briefing.html?client=XORCOM" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=XORCOM" class="phase-node complete">M02</a>
             <a href="roadmap.html?client=XORCOM" class="phase-node active">M03</a>
             <a href="governance.html?client=XORCOM" class="phase-node">M04</a>
         </div>
     </div>
 
     <div class="client-card">
-        <h3>GHG <span style="float:right; color:var(--amber); font-size:12px;">42% CAI</span></h3>
+        <div class="card-top">
+            <div class="client-info"><h3>GHG</h3><p>M-2026-GHG // Facilities</p></div>
+            <div class="cai-badge" style="color:var(--status-yellow);">42% CAI</div>
+        </div>
         <div class="phase-rail">
-            <a href="briefing.html?client=GHG" class="phase-node">M01</a>
+            <a href="briefing.html?client=GHG" class="phase-node complete">M01</a>
             <a href="diagnostic.html?client=GHG" class="phase-node active">M02</a>
             <a href="roadmap.html?client=GHG" class="phase-node">M03</a>
             <a href="governance.html?client=GHG" class="phase-node">M04</a>
         </div>
     </div>
-    
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Nexus</h3><p>M-2025-NEX // Supply Chain</p></div>
+            <div class="cai-badge" style="color:var(--status-green);">96% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=NEXUS" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=NEXUS" class="phase-node complete">M02</a>
+            <a href="roadmap.html?client=NEXUS" class="phase-node complete">M03</a>
+            <a href="governance.html?client=NEXUS" class="phase-node active">M04</a>
+        </div>
     </div>
 
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Beacon</h3><p>M-2026-BCH // Med-Surg</p></div>
+            <div class="cai-badge" style="color:#666;">-- CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=BEACON" class="phase-node active">M01</a>
+            <a href="diagnostic.html?client=BEACON" class="phase-node">M02</a>
+            <a href="roadmap.html?client=BEACON" class="phase-node">M03</a>
+            <a href="governance.html?client=BEACON" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    <div class="client-card">
+        <div class="card-top">
+            <div class="client-info"><h3>Titan</h3><p>M-2026-TTN // Industrial</p></div>
+            <div class="cai-badge" style="color:var(--status-yellow);">58% CAI</div>
+        </div>
+        <div class="phase-rail">
+            <a href="briefing.html?client=TITAN" class="phase-node complete">M01</a>
+            <a href="diagnostic.html?client=TITAN" class="phase-node active">M02</a>
+            <a href="roadmap.html?client=TITAN" class="phase-node">M03</a>
+            <a href="governance.html?client=TITAN" class="phase-node">M04</a>
+        </div>
+    </div>
+
+    </div>
+
+<footer style="text-align: center; padding: 20px; font-size: 9px; color: #444; text-transform: uppercase;">Meridian Access Group // 2026</footer>
 </body>
 </html>
